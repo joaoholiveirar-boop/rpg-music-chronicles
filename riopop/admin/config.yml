@@ -1,0 +1,62 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: seu-usuario/seu-repositorio  # ⚠️ ALTERE ESTA LINHA!
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "Notícias"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Categoria", name: "category", widget: "select", options: ["EXCLUSIVO", "ANÁLISE", "RUMORES", "REVIEW", "ENTREVISTA"] }
+      - { label: "Tags", name: "tags", widget: "list", default: ["KatyPerry"] }
+      - { label: "Imagem de Destaque", name: "featured_image", widget: "image" }
+      - { label: "Resumo", name: "excerpt", widget: "text" }
+      - { label: "Corpo da Notícia", name: "body", widget: "markdown" }
+
+  - name: "charts"
+    label: "Charts"
+    folder: "content/charts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título do Chart", name: "title", widget: "string" }
+      - { label: "Período", name: "period", widget: "string" }
+      - { label: "Data de Publicação", name: "date", widget: "datetime" }
+      - { label: "Dados do Chart", name: "data", widget: "object", fields: [
+          { label: "Top Singles", name: "singles", widget: "list", fields: [
+            { label: "Posição", name: "position", widget: "number" },
+            { label: "Artista", name: "artist", widget: "string" },
+            { label: "Música", name: "song", widget: "string" },
+            { label: "Unidades", name: "units", widget: "string" }
+          ]}
+        ]}
+
+  - name: "artists"
+    label: "Artistas"
+    folder: "content/artists"
+    create: true
+    identifier_field: "name"
+    fields:
+      - { label: "Nome", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "markdown" }
+      - { label: "Carreira Simulada", name: "career", widget: "object", fields: [
+          { label: "Início", name: "start", widget: "datetime" },
+          { label: "Gênero", name: "genre", widget: "string" },
+          { label: "Gravadora", name: "label", widget: "string" }
+        ]}
+      - label: "Discografia"
+        name: "discography"
+        widget: "list"
+        fields:
+          - { label: "Álbum", name: "album", widget: "string" }
+          - { label: "Ano", name: "year", widget: "number" }
+          - { label: "Posição no Chart", name: "chart_peak", widget: "string" }
